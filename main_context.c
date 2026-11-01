@@ -1107,13 +1107,15 @@ static int contextMenuBookmarksEnterCallback(int sel, void *context) {
   switch (sel) {
     case MENU_BOOKMARKS_SHOW_BOOKMARKS:
     {
-      char path[MAX_PATH_LENGTH] = VITASHELL_BOOKMARKS_PATH;
+      char path[MAX_PATH_LENGTH];
+      strcpy(path, VITASHELL_BOOKMARKS_PATH);
       jump_to_directory_track_current_path(path);
       break;
     }
     case MENU_BOOKMARKS_RECENT_FILES:
     {
-      char path[MAX_PATH_LENGTH] = VITASHELL_RECENT_PATH;
+      char path[MAX_PATH_LENGTH];
+      strcpy(path, VITASHELL_RECENT_PATH);
       jump_to_directory_track_current_path(path);
       break;
     }

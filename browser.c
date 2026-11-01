@@ -446,7 +446,8 @@ int shortCuts() {
     // causes VS to crash
     if (now - time_last_bookmarks > THRESHOLD_LAST_PAD_BOOKMARKS_WAIT) {
       if (strncmp(file_list.path, VITASHELL_BOOKMARKS_PATH, MAX_PATH_LENGTH) != 0) {
-        char path[MAX_PATH_LENGTH] = VITASHELL_BOOKMARKS_PATH;
+        char path[MAX_PATH_LENGTH];
+        strcpy(path, VITASHELL_BOOKMARKS_PATH);
         sort_mode = last_set_sort_mode;
         jump_to_directory_track_current_path(path);
         time_last_bookmarks = now;
@@ -460,7 +461,8 @@ int shortCuts() {
     SceInt64 now = sceKernelGetSystemTimeWide();
     if (now - time_last_recent_files > THRESHOLD_LAST_PAD_RECENT_FILES_WAIT) {
       if (strncmp(file_list.path, VITASHELL_RECENT_PATH, MAX_PATH_LENGTH) != 0) {
-        char path[MAX_PATH_LENGTH] = VITASHELL_RECENT_PATH;
+        char path[MAX_PATH_LENGTH];
+        strcpy(path, VITASHELL_RECENT_PATH);
         sort_mode = SORT_BY_DATE;
         jump_to_directory_track_current_path(path);
         time_last_recent_files = now;

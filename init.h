@@ -41,6 +41,7 @@ typedef struct {
 vita2d_pgf *loadSystemFonts();
 
 int isSafeMode();
+void getVitaShellPath(char *path, int size, const char *relative_path);
 void initVitaShell();
 void finishVitaShell();
 

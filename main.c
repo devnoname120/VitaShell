@@ -237,7 +237,9 @@ void initUsb() {
   if (!path)
     return;
 
-  usbdevice_modid = startUsb("ux0:VitaShell/module/usbdevice.skprx", path, SCE_USBSTOR_VSTOR_TYPE_FAT);
+  char module_path[MAX_PATH_LENGTH];
+  getVitaShellPath(module_path, MAX_PATH_LENGTH, "module/usbdevice.skprx");
+  usbdevice_modid = startUsb(module_path, path, SCE_USBSTOR_VSTOR_TYPE_FAT);
   if (usbdevice_modid >= 0) {
     // Lock power timers
     powerLock();
@@ -1251,8 +1253,9 @@ int main(int argc, const char *argv[]) {
   initContextMenuWidth();
   initTextContextMenuWidth();
   
-  // Automatic network update
-  if (!vitashell_config.disable_autoupdate) {
+  // Automatic network update (the updater installs to ux0:, so skip it
+  // when running from the ur0: fallback)
+  if (!vitashell_config.disable_autoupdate && strcmp(VITASHELL_BASE, VITASHELL_UX0_BASE) == 0) {
     SceUID thid = sceKernelCreateThread("network_update_thread", network_update_thread, 0x10000100, 0x100000, 0, 0, NULL);
     if (thid >= 0)
       sceKernelStartThread(thid, 0, NULL);

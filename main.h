@@ -58,11 +58,23 @@
 
 #define VITASHELL_VERSION ((VITASHELL_VERSION_MAJOR << 0x18) | (VITASHELL_VERSION_MINOR << 0x10))
 
-#define VITASHELL_LASTDIR "ux0:VitaShell/internal/lastdir.txt"
+// VitaShell data folder. Normally ux0:VitaShell, but falls back to
+// ur0:VitaShell when ux0: is unavailable (e.g. no memory card inserted),
+// so that VitaShell can still be used to investigate and repair the system.
+#define VITASHELL_UX0_BASE "ux0:VitaShell"
+#define VITASHELL_UR0_BASE "ur0:VitaShell"
+
+extern char vitashell_base[16];
+extern char vitashell_lastdir[64];
+extern char vitashell_bookmarks_path[64];
+extern char vitashell_recent_path[64];
+
+#define VITASHELL_BASE vitashell_base
+#define VITASHELL_LASTDIR vitashell_lastdir
 
 // needs / at the end
-#define VITASHELL_BOOKMARKS_PATH "ux0:VitaShell/bookmarks/"
-#define VITASHELL_RECENT_PATH "ux0:VitaShell/recent/"
+#define VITASHELL_BOOKMARKS_PATH vitashell_bookmarks_path
+#define VITASHELL_RECENT_PATH vitashell_recent_path
 #define VITASHELL_RECENT_PATH_DELETE_INTERVAL_DAYS 14
 
 #define VITASHELL_TITLEID "VITASHELL"
